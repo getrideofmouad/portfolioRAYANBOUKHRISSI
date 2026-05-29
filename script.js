@@ -93,8 +93,11 @@ window.addEventListener('load', animateOnScroll);
 const galleryItems = document.querySelectorAll('.gallery-item');
 
 galleryItems.forEach(item => {
+    const img = item.querySelector('img');
+    const video = item.querySelector('video');
+    if (!img || video) return;
+
     item.addEventListener('click', () => {
-        const img = item.querySelector('img');
         const modal = document.createElement('div');
         modal.classList.add('modal');
         
