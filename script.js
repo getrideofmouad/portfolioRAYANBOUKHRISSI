@@ -89,13 +89,31 @@ window.addEventListener('scroll', animateOnScroll);
 // Initialize animations on page load
 window.addEventListener('load', animateOnScroll);
 
+// Video covers
+document.querySelectorAll('.video-cover').forEach(cover => {
+    cover.addEventListener('click', () => {
+        const videoSrc = cover.dataset.videoSrc;
+        if (!videoSrc) return;
+
+        const iframe = document.createElement('iframe');
+        iframe.className = 'drive-video';
+        iframe.src = videoSrc;
+        iframe.allow = 'autoplay; fullscreen';
+        iframe.allowFullscreen = true;
+
+        cover.replaceWith(iframe);
+    });
+});
+
 // Gallery Image Modal
 const galleryItems = document.querySelectorAll('.gallery-item');
 
 galleryItems.forEach(item => {
     const img = item.querySelector('img');
     const video = item.querySelector('video');
-    if (!img || video) return;
+    const videoCover = item.querySelector('.video-cover');
+    const driveVideo = item.querySelector('.drive-video');
+    if (!img || video || videoCover || driveVideo) return;
 
     item.addEventListener('click', () => {
         const modal = document.createElement('div');
